@@ -7,4 +7,4 @@ in the server side Apex class: RolesController.apxc.
 
 The show/hide functionnality is based on native JS/CSS used in the .js controllers.
 
-Make sure to have some data before you test it ;)
+Make sure to have some data before you test it! And please, don't mind the names ;)
