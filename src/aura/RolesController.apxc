@@ -1,3 +1,9 @@
+/*
+* Author: Bilal El Aly
+* Date : 25/09/2017
+* Description: Apex class to get all roles and display them in
+			   the controller using Wrapper Class object.
+*/
 public class RolesController {
     public static List<ObjectWrapper> listObjectWrappers {get; set;}
     public static List<ObjectWrapper> listObjectWrappersIndexed {get; set;}
