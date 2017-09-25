@@ -1,0 +1,10 @@
+<aura:application extends="force:slds" access="global">
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+                <h1 class="slds-page-header__title slds-truncate" title="Product Hierarchy">Product Hierarchy</h1>
+            </div>
+        </div>
+    </div>
+    <c:NewTreeNodeComponentTest />
+</aura:application>
