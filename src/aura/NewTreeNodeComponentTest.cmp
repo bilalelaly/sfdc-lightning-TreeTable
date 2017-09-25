@@ -1,0 +1,71 @@
+<aura:component access="global" controller="RolesController">
+    <aura:attribute name="rolesWrappers" type="RolesController.ObjectWrapper" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div style="margin-left: 10px">
+        <table id="example" class="slds-table slds-table--bordered slds-tree slds-table--tree resizable-cols" style="table-layout:fixed;">
+            <thead>
+                <tr class="slds-text-heading--label" >
+                    <th class="slds-cell-buffer--left initialSortAsc ascending">Name</th>
+                    <th class="initialSortAsc">Parent Role ID</th>
+                    <th class="initialSortAsc">Developer Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.rolesWrappers}" var="wrapper">
+                    <aura:if isTrue="{!wrapper.parentId == null}" >
+                        <tr id="{!wrapper.roleId}" class="mainParent collapsed" data-wrapper="{!wrapper.roleId}">
+                            <td >
+                                <div class="{!'a-current-'+ wrapper.roleId}">
+                                    <c:ButtonComponent value="{!wrapper.roleId}" press="{!c.applyCss}" />&nbsp;
+                                    <a>{!wrapper.name}</a>
+                                </div>
+                            </td>
+                            <td>
+                                {!wrapper.parentRoleId}
+                            </td>
+                            <td>
+                                {!wrapper.developerName}
+                            </td>
+                        </tr>
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!wrapper.listOfChilds.length > 0}">
+                                <tr id="{!wrapper.roleId}" class="{!'parent child-of-'+wrapper.parentId + ' ui-helper-hidden' + ' main-parent-'+wrapper.mainParentId}" data-themain="{!wrapper.mainParentId}" data-wrapper="{!wrapper.roleId}">
+                                    <td>
+                                        <div class="{!'a-parent-'+wrapper.parentId + ' a-current-'+ wrapper.roleId}">
+                                            <c:ButtonComponent value="{!wrapper.roleId}" press="{!c.applyCss}" />&nbsp;
+                                            <a >
+                                                {!wrapper.name}
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {!wrapper.parentRoleId}
+                                    </td>
+                                    <td>
+                                        {!wrapper.developerName}
+                                    </td>
+                                </tr>
+                                <aura:set attribute="else">
+                                    <tr id="{!wrapper.roleId}" class="{!'child-of-'+wrapper.parentId + ' ui-helper-hidden' + ' main-parent-'+wrapper.mainParentId}" data-themain="{!wrapper.mainParentId}">
+                                        <td>
+                                            <div class="{!'a-parent-'+wrapper.parentId + ' a-current-'+ wrapper.roleId}">
+                                                <a >{!wrapper.name}</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {!wrapper.parentRoleId}
+                                        </td>
+                                        <td>
+                                            {!wrapper.developerName}
+                                        </td>
+                                    </tr>
+                                </aura:set>
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>
