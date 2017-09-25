@@ -1,3 +1,8 @@
+/*<!-- 
+* Author: Bilal El Aly
+* Date : 25/09/2017
+* Description: Lightning component Controller
+*/
 ({
     doInit: function(component, event, helper) {     
         // Fetch the account list from the Apex controller  
