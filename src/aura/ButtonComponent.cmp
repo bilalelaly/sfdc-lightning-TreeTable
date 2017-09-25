@@ -1,0 +1,10 @@
+<aura:component >
+    <aura:attribute name="press" type="Aura.Action" access="global" description="JS controller action to perform when button pressed"/>
+    <aura:attribute name="value" type="String" access="global" description="Button value"/> 
+    <button onclick="{!v.press}" value="{!v.value}" class="{!'button-right-'+v.value}" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow:hidden;outline:none;">
+        <lightning:icon iconName="utility:chevronright" variant="dark" size="x-small" class="{!'chevronRight'+v.value}"/>
+    </button>
+    <button onclick="{!v.press}" value="{!v.value}" class="{!'button-down-'+v.value + ' hideChevron'}" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow:hidden;outline:none;">
+        <lightning:icon iconName="utility:chevrondown" variant="dark" size="x-small" class="{!'chevronDown'+v.value}"/>
+    </button>
+</aura:component>
