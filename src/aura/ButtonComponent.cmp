@@ -1,3 +1,9 @@
+<!-- 
+* Author: Bilal El Aly
+* Date : 25/09/2017
+* Description: Lightning component containing
+			   the Chevron right and down icon buttons
+-->
 <aura:component >
     <aura:attribute name="press" type="Aura.Action" access="global" description="JS controller action to perform when button pressed"/>
     <aura:attribute name="value" type="String" access="global" description="Button value"/> 
