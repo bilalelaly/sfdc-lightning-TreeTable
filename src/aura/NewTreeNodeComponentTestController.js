@@ -9,11 +9,12 @@
         helper.getRoles(component);
     },
     applyCss: function(cmp,event,helper){
+        
         var id_str = event.currentTarget.value;
         var currentElement = document.getElementById(id_str);
         var childs = document.getElementsByClassName('child-of-'+id_str);
-        var toIndentElements = document.getElementsByClassName('a-parent-'+id_str);
-        var currentHrefElement = document.getElementsByClassName('a-current-'+id_str);
+        var toIndentElements = document.getElementsByClassName('div-parent-'+id_str);
+        var currentHrefElement = document.getElementsByClassName('div-current-'+id_str);
         var expandButton = document.getElementsByClassName('button-right-'+id_str)[0];
         var collapseButton = document.getElementsByClassName('button-down-'+id_str)[0];
         var i, j;
@@ -25,15 +26,15 @@
                 currentElement.classList.remove('collapsed');
                 //Expand all his childs
                 for (i = 0; i < childs.length; i++) {
-					childs[i].classList.remove('ui-helper-hidden');
+                    childs[i].classList.remove('ui-helper-hidden');
                 }
             }
             else{
                 //un-collapse and hide all childs
                 currentElement.classList.add('collapsed');
-                var allChildsOfMainParent = document.getElementsByClassName('main-parent-'+id_str);
-                for(i = 0; i < allChildsOfMainParent.length; i++){
-                    allChildsOfMainParent[i].classList.add('ui-helper-hidden');
+                //var allChildsOfMainParent = document.getElementsByClassName('main-parent-'+id_str);
+                for(i = 0; i < childs.length; i++){
+                    this.hideAllChilds(childs[i], childs[i].id);
                 }
             }
         }
@@ -45,13 +46,13 @@
                     childs[i].classList.remove('ui-helper-hidden');
                 }
                 else {
-                    childs[i].classList.add('ui-helper-hidden');
+                    this.hideAllChilds(childs[i], childs[i].id);
                 }
             }
         }
         
         //Add indenting
-        //For each clicked element increment the childs' margin left by 20px
+        //For each clicked element increment the childs' margin left by 45px
         var mainParent, parentMargin;
         if(!currentElement.classList.contains('mainParent') && id_str){
             parentMargin = parseInt(currentHrefElement[0].style.marginLeft, 10);
@@ -73,6 +74,22 @@
         else {
             expandButton.classList.add('hideChevron');
             collapseButton.classList.remove('hideChevron');
+        }
+    },
+    hideAllChilds : function(childElement, idOfChild) {
+        var i;
+        var childsOfChild = document.getElementsByClassName('child-of-'+idOfChild);
+        var expandButton = document.getElementsByClassName('button-right-'+idOfChild)[0];
+        var collapseButton = document.getElementsByClassName('button-down-'+idOfChild)[0];
+        
+        childElement.classList.add('ui-helper-hidden');
+        for (i = 0; i < childsOfChild.length; i++) {
+            if(!childsOfChild[i].classList.contains('ui-helper-hidden')) {
+                childsOfChild[i].classList.add('ui-helper-hidden');
+                expandButton.classList.remove('hideChevron');
+                collapseButton.classList.add('hideChevron');
+            }
+            this.hideAllChilds(childsOfChild[i], childsOfChild[i].id);
         }
     },
 })
